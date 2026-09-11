@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PPT Maker — structured content to editable PowerPoint</title>
+  <meta name="description" content="Turn structured presentation content into a polished, fully editable .pptx file. No AI, no accounts.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%236c5ce7'/%3E%3Ctext x='50' y='70' font-size='56' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">P</div>
+      <div class="brand-text">
+        <h1>PPT Maker</h1>
+        <p>Structured content &rarr; editable .pptx</p>
+      </div>
+    </div>
+    <div class="topbar-note">No AI &middot; No accounts &middot; Your content, your deck</div>
+  </header>
+
+  <main class="container">
+
+    <nav class="tabs" role="tablist" aria-label="Editing mode">
+      <button class="tab active" data-tab="builder" role="tab" aria-selected="true">Builder</button>
+      <button class="tab" data-tab="json" role="tab" aria-selected="false">Advanced JSON</button>
+    </nav>
+
+    <div class="workspace">
+      <div class="work-col">
+
+        <!-- ============ Builder tab ============ -->
+        <section id="builder" class="panel active" role="tabpanel">
+          <div class="deck-meta">
+            <label for="deck-title">Presentation title</label>
+            <input id="deck-title" type="text" maxlength="300" placeholder="e.g. Q3 Business Review" autocomplete="off">
+          </div>
+
+          <div id="slide-list" class="slide-list" aria-live="polite"></div>
+
+          <div class="add-slide">
+            <label for="new-slide-type" class="visually-hidden">New slide type</label>
+            <select id="new-slide-type"></select>
+            <button id="add-slide" class="btn ghost" type="button">+ Add slide</button>
+          </div>
+        </section>
+
+        <!-- ============ JSON tab ============ -->
+        <section id="json" class="panel" role="tabpanel">
+          <p class="hint">
+            Edit the raw presentation specification. Switch to this tab to sync it from the
+            builder, or paste your own JSON and apply it back to the builder.
+          </p>
+          <textarea id="json-editor" spellcheck="false" aria-label="Presentation JSON specification"></textarea>
+          <div class="json-actions">
+            <button id="json-sync" class="btn ghost" type="button">&#8635; Sync from builder</button>
+            <button id="json-apply" class="btn ghost" type="button">&rarr; Apply to builder</button>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- ============ Preview / summary ============ -->
+      <aside class="preview" aria-label="Presentation preview">
+        <h2>Preview</h2>
+        <div class="preview-stats" id="preview-stats"></div>
+        <ol id="preview-list"></ol>
+      </aside>
+    </div>
+
+    <!-- ============ Generate ============ -->
+    <div class="actions">
+      <div id="status" class="status" hidden></div>
+      <button id="generate" class="btn primary big" type="button">Generate PowerPoint</button>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <p>PPT Maker &mdash; renders your structured content into a real, editable PowerPoint file using <a href="https://python-pptx.readthedocs.io/" target="_blank" rel="noopener">python-pptx</a>.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
